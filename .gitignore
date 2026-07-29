@@ -1,0 +1,5 @@
+# Full-resolution source images (kept local only — optimized copies live in assets/img)
+_source/
+
+.DS_Store
+.vercel

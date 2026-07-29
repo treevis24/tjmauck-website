@@ -1,0 +1,441 @@
+/* ==========================================================================
+   TJ Mauck Films — tjmauck.com
+   Hand-written rebuild of the Webflow design (tj-mauck-films.webflow.io)
+   ========================================================================== */
+
+:root {
+  --bg: #111;
+  --bar: #000;
+  --text-light: #e7e7e7;
+  --text-dark: #1a1b1f;
+  --button: #1a1b1f;
+  --button-hover: #32343a;
+  --divider: #e4ebf3;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text-light);
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+img { display: block; max-width: 100%; }
+
+/* --------------------------------------------------------------------------
+   Navbar
+   -------------------------------------------------------------------------- */
+
+.navbar {
+  background-color: #fff;
+  position: relative;
+  z-index: 1000;
+}
+
+.navbar-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  padding: 9px 15px;
+  flex-shrink: 0;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-dark);
+  letter-spacing: .25px;
+  margin-left: 5px;
+  padding: 5px;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.nav-link:hover { color: rgba(26, 27, 31, .75); }
+
+.nav-divider {
+  background-color: var(--divider);
+  width: 1px;
+  height: 22px;
+  margin: 0 15px;
+}
+
+.button-primary {
+  color: #fff;
+  background-color: var(--button);
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 25px;
+  font-size: 12px;
+  line-height: 20px;
+  text-decoration: none;
+  transition: background-color .2s;
+}
+
+.button-primary:hover { background-color: var(--button-hover); }
+.button-primary:active { background-color: #43464d; }
+
+/* Hamburger — hidden on desktop */
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.menu-button span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-dark);
+  margin: 5px 0;
+}
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+
+.hero {
+  background-color: var(--bg);
+}
+
+.hero-inner {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image {
+  width: 62%;
+  margin: 40px 0;
+}
+
+/* --------------------------------------------------------------------------
+   Sticky column header — TITLE | VIDEO | FRAME GRABS
+   -------------------------------------------------------------------------- */
+
+.column-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: var(--bar);
+  color: var(--text-light);
+  display: grid;
+  grid-template-columns: .25fr 1fr 1fr;
+  text-align: center;
+  margin: 5px 0;
+  font-weight: 400;
+}
+
+/* --------------------------------------------------------------------------
+   Project rows
+   -------------------------------------------------------------------------- */
+
+.project {
+  display: grid;
+  grid-template-columns: .25fr 1fr 1fr;
+  background-color: var(--bg);
+  color: var(--text-light);
+  width: 100%;
+  margin-top: 10px;
+  scroll-margin-top: 40px;
+}
+
+/* Rotated title column (desktop) */
+.vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.vt-title {
+  font-size: 20px;
+  font-weight: 700;
+  display: block;
+}
+
+.vt-sub {
+  font-size: 18px;
+  font-weight: 400;
+  display: block;
+  margin-top: 4px;
+}
+
+.vt-cat {
+  font-size: 12px;
+  font-weight: 300;
+  display: block;
+  margin-top: 6px;
+}
+
+/* Video column */
+.videos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.videos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-link {
+  display: block;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Aveeno: 2×2 grid of videos */
+.videos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+}
+
+/* Frame grabs column: 3×3 grid */
+.grabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  height: 100%;
+}
+
+.grab { display: block; }
+
+.grabs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile project titles — hidden on desktop */
+.project-title-mobile { display: none; }
+
+/* --------------------------------------------------------------------------
+   Lightbox
+   -------------------------------------------------------------------------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, .92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox[hidden] { display: none; }
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content img {
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+}
+
+.lightbox-content .video-frame {
+  width: min(1280px, 90vw);
+  aspect-ratio: 16 / 9;
+  max-height: 85vh;
+}
+
+.lightbox-content iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.lightbox button {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  opacity: .8;
+  z-index: 2001;
+}
+
+.lightbox button:hover { opacity: 1; }
+
+.lightbox-close {
+  top: 10px;
+  right: 18px;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 64px;
+  line-height: 1;
+  padding: 20px 14px;
+}
+
+.lightbox-prev { left: 6px; }
+.lightbox-next { right: 6px; }
+
+.lightbox-prev[hidden],
+.lightbox-next[hidden] { display: none; }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 1px;
+  opacity: .8;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet — ≤991px: collapse nav into hamburger menu
+   -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 991px) {
+  .menu-button { display: block; }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 10px;
+    right: 10px;
+    background-color: #fff;
+    border-radius: 50px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    padding: 20px;
+    box-shadow: 0 8px 50px rgba(0, 0, 0, .05);
+  }
+
+  .nav-menu.open { display: flex; }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile — ≤767px: stacked sections, mobile title blocks
+   -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 767px) {
+  .nav-menu {
+    border-radius: 20px;
+    flex-direction: column;
+    padding-bottom: 30px;
+  }
+
+  .nav-divider {
+    width: 200px;
+    max-width: 100%;
+    height: 1px;
+    margin: 10px 0;
+  }
+
+  .hero-image {
+    width: 92%;
+    margin: 24px 0;
+  }
+
+  .column-header { display: none; }
+  .vertical-title { display: none; }
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+  }
+
+  .project-title-mobile {
+    display: block;
+    background-color: var(--bar);
+    color: #e0e0e0;
+    text-align: center;
+    padding: 20px 10px;
+  }
+
+  .mt-title {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .mt-sub {
+    display: block;
+    font-weight: 400;
+  }
+
+  .mt-cat {
+    display: block;
+    font-weight: 100;
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    font-size: 44px;
+    padding: 20px 8px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Small mobile — ≤479px
+   -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 479px) {
+  .navbar-inner { padding: 10px 20px; }
+
+  .brand img { width: 96vw; max-width: 240px; }
+
+  .project-title-mobile { padding: 15px 10px; }
+
+  .mt-title {
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  .mt-sub { line-height: 19px; }
+
+  .mt-cat { font-size: 12px; }
+}
