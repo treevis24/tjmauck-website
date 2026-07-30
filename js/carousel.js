@@ -66,10 +66,11 @@
   function siteReady() {
     document.body.classList.add('ready');
     playOnly(0);
-    // Warm the other slides' first bytes once the hero is playing
+    // Warm the other slides once the hero is playing, so switching is instant.
+    // Desktop buffers fully; mobile only grabs headers (cellular-friendly).
     setTimeout(function () {
       slides.forEach(function (slide, i) {
-        if (i !== 0) slide.querySelector('video').preload = 'metadata';
+        if (i !== 0) slide.querySelector('video').preload = isMobile ? 'metadata' : 'auto';
       });
     }, 1500);
   }
@@ -156,6 +157,14 @@
       target += (Math.round(target / vw) * vw - target) * 0.12;
     }
     current += (target - current) * 0.085;
+
+    // Once settled, land exactly on the slide and normalize back into range —
+    // otherwise the easing hovers just short of the wrap point and the page
+    // sits on the poster-only clone instead of the real playing slide.
+    if (now - lastWheel > 160 && Math.abs(target - current) < 0.5) {
+      target = Math.round(target / vw) * vw;
+      current = target = mod(target, N * vw);
+    }
 
     var render = mod(current, N * vw);
     track.style.transform = 'translate3d(' + (-render) + 'px,0,0)';
