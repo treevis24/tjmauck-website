@@ -34,7 +34,24 @@
   slides.forEach(function (slide) {
     var v = slide.querySelector('video');
     v.src = sourceFor(slide);
+    // After first playback, drop the poster so a paused video shows its real
+    // current frame during transitions instead of snapping back to frame 1.
+    v.addEventListener('playing', function () { v.removeAttribute('poster'); }, { once: true });
   });
+
+  function tryPlay(v) {
+    var p = v.play();
+    if (p) p.catch(function () {
+      // Autoplay blocked (e.g. low-power mode): retry on first gesture
+      var retry = function () {
+        v.play().catch(function () {});
+        window.removeEventListener('pointerdown', retry);
+        window.removeEventListener('wheel', retry);
+      };
+      window.addEventListener('pointerdown', retry, { once: true });
+      window.addEventListener('wheel', retry, { once: true });
+    });
+  }
 
   function playOnly(index) {
     slides.forEach(function (slide, i) {
@@ -42,17 +59,7 @@
       slide.classList.toggle('active', i === index);
       if (i === index) {
         v.preload = 'auto';
-        var p = v.play();
-        if (p) p.catch(function () {
-          // Autoplay blocked (e.g. low-power mode): retry on first gesture
-          var retry = function () {
-            v.play().catch(function () {});
-            window.removeEventListener('pointerdown', retry);
-            window.removeEventListener('wheel', retry);
-          };
-          window.addEventListener('pointerdown', retry, { once: true });
-          window.addEventListener('wheel', retry, { once: true });
-        });
+        tryPlay(v);
       } else {
         v.pause();
       }
@@ -114,15 +121,14 @@
   }
 
   /* ------------------------------------------------------------------
-     Desktop: virtual scroll engine with easing, snap and seamless wrap
+     Desktop: virtual scroll engine with easing, snap and seamless wrap.
+     No clones: every frame, each real slide is placed at its shortest
+     wrapped offset from the scroll position, so the actual playing video
+     appears on either end. Any partially visible slide plays; fully
+     hidden slides pause holding their frame.
      ------------------------------------------------------------------ */
 
-  // Clone of the first slide (poster only) closes the loop visually
-  var clone = slides[0].cloneNode(true);
-  clone.classList.remove('active');
-  clone.setAttribute('aria-hidden', 'true');
-  clone.querySelector('video').removeAttribute('src');
-  track.appendChild(clone);
+  carousel.classList.add('js-slides');
 
   var vw = window.innerWidth;
   var target = 0;        // where input wants to be (unbounded)
@@ -152,27 +158,47 @@
   function mod(n, m) { return ((n % m) + m) % m; }
 
   function tick(now) {
+    var W = N * vw;
+
     // Snap to the nearest slide once wheel input settles
     if (now - lastWheel > 160) {
       target += (Math.round(target / vw) * vw - target) * 0.12;
+      if (Math.abs(target - current) < 0.5) {
+        // Settled: land exactly, and fold both values back into range
+        // (visually identical — placement below is modular)
+        target = Math.round(target / vw) * vw;
+        current = target = mod(target, W);
+      }
     }
     current += (target - current) * 0.085;
 
-    // Once settled, land exactly on the slide and normalize back into range —
-    // otherwise the easing hovers just short of the wrap point and the page
-    // sits on the poster-only clone instead of the real playing slide.
-    if (now - lastWheel > 160 && Math.abs(target - current) < 0.5) {
-      target = Math.round(target / vw) * vw;
-      current = target = mod(target, N * vw);
-    }
+    var render = mod(current, W);
+    var ready = document.body.classList.contains('ready');
 
-    var render = mod(current, N * vw);
-    track.style.transform = 'translate3d(' + (-render) + 'px,0,0)';
+    slides.forEach(function (slide, i) {
+      // Shortest wrapped offset of slide i relative to the viewport
+      var delta = mod(i * vw - render + W / 2, W) - W / 2;
+      var visible = Math.abs(delta) < vw - 0.5;
+      slide.style.transform = 'translate3d(' + delta + 'px,0,0)';
+      slide.style.visibility = visible ? 'visible' : 'hidden';
+
+      if (!ready) return;
+      var v = slide.querySelector('video');
+      if (visible && v.paused) {
+        var p = v.play();
+        if (p) p.catch(function () {}); // gesture-retry handled in playOnly
+      } else if (!visible && !v.paused) {
+        v.pause();
+      }
+    });
 
     var index = mod(Math.round(current / vw), N);
-    if (index !== activeIndex && document.body.classList.contains('ready')) {
+    if (index !== activeIndex && ready) {
       activeIndex = index;
-      playOnly(index);
+      carousel.dataset.active = index;
+      slides.forEach(function (slide, i) {
+        slide.classList.toggle('active', i === index);
+      });
     }
     requestAnimationFrame(tick);
   }

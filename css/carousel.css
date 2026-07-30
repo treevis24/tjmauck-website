@@ -102,6 +102,16 @@ body.ready .nav {
   overflow: hidden;
 }
 
+/* Desktop JS engine: slides are absolutely positioned and placed per-frame
+   at their shortest wrapped offset — the real slides close the loop, no clones */
+.carousel.js-slides .track { position: relative; }
+
+.carousel.js-slides .slide {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
 .media, .media video {
   width: 100%;
   height: 100%;
