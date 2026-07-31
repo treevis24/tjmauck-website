@@ -178,9 +178,22 @@
     slides.forEach(function (slide, i) {
       // Shortest wrapped offset of slide i relative to the viewport
       var delta = mod(i * vw - render + W / 2, W) - W / 2;
-      var visible = Math.abs(delta) < vw - 0.5;
-      slide.style.transform = 'translate3d(' + delta + 'px,0,0)';
-      slide.style.visibility = visible ? 'visible' : 'hidden';
+      var dist = Math.abs(delta);
+
+      // Hysteresis: a resting neighbor sits exactly one viewport away, right on
+      // the show/hide boundary — a single threshold flickers there as the easing
+      // converges, tearing down and rebuilding a fullscreen video layer (visible
+      // flash). Enter at 12px inside the edge, leave only at fully clear.
+      var visible = slide._vis;
+      if (dist < vw - 12) visible = true;
+      else if (dist >= vw) visible = false;
+      if (visible === undefined) visible = dist < vw - 12;
+
+      slide.style.transform = 'translate3d(' + Math.round(delta) + 'px,0,0)';
+      if (visible !== slide._vis) {
+        slide.style.visibility = visible ? 'visible' : 'hidden';
+        slide._vis = visible;
+      }
 
       if (!ready) return;
       var v = slide.querySelector('video');
