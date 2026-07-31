@@ -135,7 +135,7 @@ body.ready .nav {
       rgba(0, 0, 0, 0) 18%,
       rgba(0, 0, 0, 0) 72%,
       rgba(0, 0, 0, .42) 100%),
-    rgba(0, 0, 0, .48);
+    rgba(0, 0, 0, .33);
 }
 
 .media { position: relative; }
