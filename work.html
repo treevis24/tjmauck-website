@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Work — TJ Mauck Films</title>
+  <meta name="description" content="Selected work by TJ Mauck — director and cinematographer based in Los Angeles.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/work.css">
+</head>
+<body>
+
+  <header class="nav">
+    <a class="nav-name" href="/">
+      <span class="nav-title">TJ Mauck</span>
+      <span class="nav-sub">Director | Cinematographer</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/work" class="nav-work active">Work</a>
+      <a href="mailto:travis@tjmauck.com?subject=Hey%20TJ">Contact</a>
+      <a href="#" class="nav-about">About</a>
+    </nav>
+  </header>
+
+  <main class="work">
+    <aside class="filters" aria-label="Filter work by category">
+      <button class="filter active" data-filter="all">All Work</button>
+      <button class="filter" data-filter="commercial">Commercial</button>
+      <button class="filter" data-filter="corporate">Corporate</button>
+      <button class="filter" data-filter="narrative">Narrative</button>
+      <button class="filter" data-filter="documentary">Documentary</button>
+      <button class="filter" data-filter="music-video">Music Video</button>
+    </aside>
+
+    <section class="grid" aria-live="polite">
+      <!-- items injected by js/work.js from the PROJECTS manifest -->
+    </section>
+  </main>
+
+  <!-- Project view: thumbnail expands here; film center, grabs collaged around -->
+  <div class="project-view" hidden>
+    <button class="pv-close" aria-label="Close">&times;</button>
+    <div class="pv-collage"></div>
+    <figure class="pv-stage">
+      <div class="pv-media"></div>
+      <figcaption class="pv-title"></figcaption>
+    </figure>
+  </div>
+
+  <script src="js/work.js"></script>
+</body>
+</html>

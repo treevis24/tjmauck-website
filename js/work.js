@@ -1,0 +1,213 @@
+/* TJ Mauck Films — Work page
+   Left-rail category filters with FLIP grid animation, and the project view:
+   clicked thumbnail expands to center stage, still grabs collage in around it. */
+
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------------
+     Manifest. cats: commercial | corporate | narrative | documentary |
+     music-video. vimeo: player URL (null = not provided yet, view shows
+     the still until the link exists).
+     ------------------------------------------------------------------ */
+  var PROJECTS = [
+    { slug: 'whipsmart',      client: 'Whipsmart',       name: 'Your Story Starts Here',    cats: ['commercial'],                vimeo: null },
+    { slug: 'ben-harper',     client: 'Ben Harper',      name: 'Before the Rain Dried',     cats: ['music-video'],               vimeo: 'https://player.vimeo.com/video/1070519366?h=5d125dd725&autoplay=1' },
+    { slug: 'aveeno',         client: 'Aveeno',          name: 'Healthy Is Our Nature',     cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/925095042?autoplay=1' },
+    { slug: 'hims',           client: 'Hims',            name: 'Life Is Sexual',            cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/563594183?autoplay=1' },
+    { slug: 'search-dog',     client: 'Natl. Search Dog Foundation', name: 'From Rescued to Rescuer', cats: ['corporate', 'documentary'], vimeo: 'https://player.vimeo.com/video/276766887?autoplay=1' },
+    { slug: 'la-femme',       client: 'Velvet Canyon',   name: 'La Femme',                  cats: ['narrative'],                 vimeo: 'https://player.vimeo.com/video/341268178?autoplay=1' },
+    { slug: 'only-in-dreams', client: 'Only in Dreams',  name: 'Short Film',                cats: ['narrative'],                 vimeo: 'https://www.youtube-nocookie.com/embed/EvfffIIJ0d0?autoplay=1' },
+    { slug: 'coachella',      client: 'The Art of Coachella', name: 'Documentary',          cats: ['documentary'],               vimeo: null },
+    { slug: 'esalon',         client: 'eSalon',          name: 'Victoria',                  cats: ['commercial', 'corporate'],   vimeo: null },
+    { slug: 'dermalogica',    client: 'Dermalogica',     name: 'Hydro Masque Exfoliator',   cats: ['commercial'],                vimeo: null },
+    { slug: 'belle-keeks',    client: 'Belle & Keeks',   name: 'Short Film',                cats: ['narrative'],                 vimeo: null },
+    { slug: 'surprise',       client: 'Surprise!',       name: 'Short Film',                cats: ['narrative'],                 vimeo: null },
+    { slug: 'samantha-wills', client: 'Samantha Wills',  name: 'For Billabong',             cats: ['commercial'],                vimeo: null }
+  ];
+
+  var grid = document.querySelector('.grid');
+  var filters = Array.prototype.slice.call(document.querySelectorAll('.filter'));
+  var view = document.querySelector('.project-view');
+  var stage = view.querySelector('.pv-stage');
+  var media = view.querySelector('.pv-media');
+  var title = view.querySelector('.pv-title');
+  var collage = view.querySelector('.pv-collage');
+  var closeBtn = view.querySelector('.pv-close');
+
+  /* ------------------------------------------------------------------
+     Render grid
+     ------------------------------------------------------------------ */
+  PROJECTS.forEach(function (p, i) {
+    var el = document.createElement('a');
+    el.className = 'work-item';
+    el.href = '#' + p.slug;
+    el.dataset.slug = p.slug;
+    el.dataset.cats = p.cats.join(',');
+    var num = ('0' + (i + 1)).slice(-2);
+    el.innerHTML =
+      '<h2><span class="num">' + num + '</span>' + p.client + " '" + p.name + "'</h2>" +
+      '<figure><img src="assets/img/work/' + p.slug + '/thumb-960.jpg" ' +
+      'srcset="assets/img/work/' + p.slug + '/thumb-480.jpg 480w, assets/img/work/' + p.slug + '/thumb-960.jpg 960w" ' +
+      'sizes="(max-width: 767px) 46vw, 28vw" loading="lazy" alt="' + p.client + ' — ' + p.name + '"></figure>';
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      openProject(p, num, el);
+    });
+    grid.appendChild(el);
+  });
+
+  var items = Array.prototype.slice.call(grid.children);
+
+  /* ------------------------------------------------------------------
+     Filtering with FLIP: fade out the leavers, then glide the survivors
+     into their new grid positions.
+     ------------------------------------------------------------------ */
+  var animating = false;
+
+  function applyFilter(cat) {
+    if (animating) return;
+    animating = true;
+
+    var leaving = [], staying = [];
+    items.forEach(function (el) {
+      var match = cat === 'all' || el.dataset.cats.split(',').indexOf(cat) !== -1;
+      (match ? staying : leaving)[match ? 'push' : 'push'](el);
+    });
+
+    // First: measure current positions of everything visible
+    var first = new Map();
+    items.forEach(function (el) {
+      if (!el.classList.contains('hidden')) first.set(el, el.getBoundingClientRect());
+    });
+
+    // Fade out the leavers in place
+    leaving.forEach(function (el) {
+      if (!el.classList.contains('hidden')) el.classList.add('hiding');
+    });
+
+    setTimeout(function () {
+      // Reflow: hide leavers, reveal returning items (opacity 0 for fade-in)
+      leaving.forEach(function (el) { el.classList.add('hidden'); el.classList.remove('hiding'); });
+      var entering = [];
+      staying.forEach(function (el) {
+        if (el.classList.contains('hidden')) {
+          el.classList.remove('hidden');
+          el.style.opacity = '0';
+          entering.push(el);
+        }
+      });
+
+      // Last + Invert + Play: glide survivors from old spot to new
+      staying.forEach(function (el) {
+        var f = first.get(el);
+        if (!f) return; // was hidden, fades in instead
+        var l = el.getBoundingClientRect();
+        var dx = f.left - l.left, dy = f.top - l.top;
+        if (!dx && !dy) return;
+        el.animate([
+          { transform: 'translate(' + dx + 'px,' + dy + 'px)' },
+          { transform: 'translate(0,0)' }
+        ], { duration: 450, easing: 'cubic-bezier(.16,1,.3,1)' });
+      });
+
+      entering.forEach(function (el, i) {
+        el.animate([{ opacity: 0 }, { opacity: 1 }],
+          { duration: 350, delay: 120 + i * 40, easing: 'ease', fill: 'forwards' })
+          .onfinish = function () { el.style.opacity = ''; };
+      });
+
+      setTimeout(function () { animating = false; }, 500);
+    }, 360);
+  }
+
+  filters.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.classList.contains('active')) return;
+      filters.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      applyFilter(btn.dataset.filter);
+    });
+  });
+
+  /* ------------------------------------------------------------------
+     Project view: FLIP-expand the clicked thumbnail to center stage,
+     then collage the grabs in around the film.
+     ------------------------------------------------------------------ */
+  var GRAB_SPOTS = [
+    { x: '4vw',  y: '6svh',  w: '17vw', r: -4, d: .05 },
+    { x: '76vw', y: '8svh',  w: '16vw', r: 3,  d: .12 },
+    { x: '2vw',  y: '58svh', w: '15vw', r: 2,  d: .2  },
+    { x: '80vw', y: '55svh', w: '16vw', r: -3, d: .28 },
+    { x: '12vw', y: '80svh', w: '14vw', r: -2, d: .36 },
+    { x: '66vw', y: '82svh', w: '15vw', r: 4,  d: .44 },
+    { x: '38vw', y: '2svh',  w: '13vw', r: -1, d: .52 },
+    { x: '42vw', y: '86svh', w: '13vw', r: 2,  d: .6  }
+  ];
+
+  function openProject(p, num, itemEl) {
+    // Populate stage
+    title.innerHTML = '<span class="num">' + num + '</span>' + p.client + " '" + p.name + "'";
+    media.innerHTML = '';
+    if (p.vimeo) {
+      var iframe = document.createElement('iframe');
+      iframe.src = p.vimeo;
+      iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+      iframe.allowFullscreen = true;
+      media.appendChild(iframe);
+    } else {
+      var still = document.createElement('img');
+      still.src = 'assets/img/work/' + p.slug + '/thumb-960.jpg';
+      still.alt = '';
+      media.appendChild(still);
+    }
+
+    // Collage
+    collage.innerHTML = '';
+    GRAB_SPOTS.forEach(function (s, i) {
+      var img = document.createElement('img');
+      img.src = 'assets/img/work/' + p.slug + '/grab-' + (i + 1) + '.jpg';
+      img.style.left = s.x;
+      img.style.top = s.y;
+      img.style.setProperty('--w', s.w);
+      img.style.setProperty('--r', s.r + 'deg');
+      img.style.setProperty('--d', s.d + 's');
+      img.alt = '';
+      collage.appendChild(img);
+    });
+
+    view.hidden = false;
+    document.body.style.overflow = 'hidden';
+
+    // FLIP: from the clicked thumbnail's rect to the centered stage
+    var thumb = itemEl.querySelector('figure').getBoundingClientRect();
+    var target = media.getBoundingClientRect();
+    var dx = thumb.left - target.left;
+    var dy = thumb.top - target.top;
+    var s = thumb.width / target.width;
+
+    view.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250, easing: 'linear' });
+    stage.animate([
+      { transform: 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px)) scale(' + s + ')', transformOrigin: 'top left' },
+      { transform: 'translate(-50%, -50%) scale(1)', transformOrigin: 'top left' }
+    ], { duration: 650, easing: 'cubic-bezier(.77,0,.175,1)' }).onfinish = function () {
+      view.classList.add('open'); // grabs collage in
+    };
+  }
+
+  function closeProject() {
+    view.classList.remove('open');
+    view.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, easing: 'linear' })
+      .onfinish = function () {
+        view.hidden = true;
+        media.innerHTML = '';
+        collage.innerHTML = '';
+        document.body.style.overflow = '';
+      };
+  }
+
+  closeBtn.addEventListener('click', closeProject);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !view.hidden) closeProject();
+  });
+})();
