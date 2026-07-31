@@ -122,6 +122,24 @@ body.ready .nav {
   background: var(--bg) center / cover no-repeat;
 }
 
+/* Scrim: slight overall dim + stronger falloff at the edges so the nav and
+   slide titles read cleanly over bright footage */
+.media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom,
+      rgba(0, 0, 0, .38) 0%,
+      rgba(0, 0, 0, 0) 18%,
+      rgba(0, 0, 0, 0) 72%,
+      rgba(0, 0, 0, .42) 100%),
+    rgba(0, 0, 0, .10);
+}
+
+.media { position: relative; }
+
 /* Slide title — bottom left, follows the active slide */
 .slide-title {
   position: absolute;
