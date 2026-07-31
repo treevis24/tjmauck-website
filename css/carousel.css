@@ -76,7 +76,10 @@ body.ready .nav {
   margin-top: 2px;
 }
 
-.nav-links a { margin-left: 28px; }
+.nav-links a {
+  margin-left: 28px;
+  font-weight: 300;
+}
 
 /* --------------------------------------------------------------------------
    Carousel
