@@ -23,11 +23,12 @@
 </head>
 <body>
 
-  <!-- Intro: poster stack that spreads, top image expands to fullscreen -->
+  <!-- Intro: cards fly up from below in 3D, stack, top card grows fullscreen.
+       DOM order = stack order: bottom card first, first project last (on top). -->
   <div class="intro" aria-hidden="true">
     <div class="intro-stack">
-      <div class="intro-thumb"><img src="assets/video/ben-harper-poster.jpg" alt=""></div>
-      <div class="intro-thumb intro-thumb-top"><img src="assets/video/whipsmart-poster.jpg" alt=""></div>
+      <div class="intro-card"><img src="assets/video/ben-harper-poster.jpg" alt=""></div>
+      <div class="intro-card intro-card-top"><img src="assets/video/whipsmart-poster.jpg" alt=""></div>
     </div>
   </div>
 

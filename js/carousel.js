@@ -90,19 +90,53 @@
     }
   });
 
-  if (reducedMotion || !intro) {
+  // Intro choreography (matched to the reference):
+  // each card flies up from below the viewport, tilted back 80°, and stands
+  // upright at 25% scale — bottom of the stack first, the first project last,
+  // landing on top. Then the top card scales to fullscreen while its image
+  // relaxes from a 1.6x zoom.
+  var EASE_FLY = 'cubic-bezier(.25, 1, .5, 1)';
+  var EASE_GROW = 'cubic-bezier(.77, 0, .175, 1)';
+
+  function runIntro(done) {
+    var cards = Array.prototype.slice.call(intro.querySelectorAll('.intro-card'));
+    var lastLanded = 0;
+
+    cards.forEach(function (card, i) {
+      var delay = 250 + i * 180;
+      card.animate([
+        { transform: 'translateY(95%) scale(.8) rotateX(-80deg)' },
+        { transform: 'translateY(0) scale(.25) rotateX(0deg)' }
+      ], { duration: 1100, delay: delay, easing: EASE_FLY, fill: 'both' });
+      lastLanded = Math.max(lastLanded, delay + 1100);
+    });
+
+    var top = cards[cards.length - 1];
+    var img = top.querySelector('img');
+
+    setTimeout(function () {
+      top.animate([
+        { transform: 'translateY(0) scale(.25)' },
+        { transform: 'translateY(0) scale(1)' }
+      ], { duration: 800, easing: EASE_GROW, fill: 'both' });
+      img.animate([
+        { transform: 'scale(1.6)' },
+        { transform: 'scale(1)' }
+      ], { duration: 1500, easing: EASE_FLY, fill: 'both' });
+
+      setTimeout(function () {
+        intro.classList.add('done');
+        done();
+        setTimeout(function () { intro.remove(); }, 500);
+      }, 820);
+    }, lastLanded + 100);
+  }
+
+  if (reducedMotion || !intro || !('animate' in document.body)) {
     if (intro) intro.remove();
     siteReady();
   } else {
-    // Let posters paint first, then run the phases
-    setTimeout(function () { intro.classList.add('stacked'); }, 350);
-    setTimeout(function () { intro.classList.add('spread'); }, 1750);
-    setTimeout(function () { intro.classList.add('grow'); }, 2450);
-    setTimeout(function () {
-      intro.classList.add('done');
-      siteReady();
-    }, 3350);
-    setTimeout(function () { intro.remove(); }, 4100);
+    runIntro(siteReady);
   }
 
   /* ------------------------------------------------------------------
