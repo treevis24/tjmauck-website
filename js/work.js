@@ -140,16 +140,8 @@
      Project view: FLIP-expand the clicked thumbnail to center stage,
      then collage the grabs in around the film.
      ------------------------------------------------------------------ */
-  var GRAB_SPOTS = [
-    { x: '4vw',  y: '6svh',  w: '17vw', r: -4, d: .05 },
-    { x: '76vw', y: '8svh',  w: '16vw', r: 3,  d: .12 },
-    { x: '2vw',  y: '58svh', w: '15vw', r: 2,  d: .2  },
-    { x: '80vw', y: '55svh', w: '16vw', r: -3, d: .28 },
-    { x: '12vw', y: '80svh', w: '14vw', r: -2, d: .36 },
-    { x: '66vw', y: '82svh', w: '15vw', r: 4,  d: .44 },
-    { x: '38vw', y: '2svh',  w: '13vw', r: -1, d: .52 },
-    { x: '42vw', y: '86svh', w: '13vw', r: 2,  d: .6  }
-  ];
+  // Tile fade-in order: outward from the center of the 4x2 wall
+  var GRAB_DELAYS = [.18, .06, .06, .18, .24, .12, .12, .24];
 
   function openProject(p, num, itemEl) {
     // Populate stage
@@ -168,16 +160,12 @@
       media.appendChild(still);
     }
 
-    // Collage
+    // Grab wall: 8 tiles, fading in outward from the center
     collage.innerHTML = '';
-    GRAB_SPOTS.forEach(function (s, i) {
+    GRAB_DELAYS.forEach(function (d, i) {
       var img = document.createElement('img');
       img.src = 'assets/img/work/' + p.slug + '/grab-' + (i + 1) + '.jpg';
-      img.style.left = s.x;
-      img.style.top = s.y;
-      img.style.setProperty('--w', s.w);
-      img.style.setProperty('--r', s.r + 'deg');
-      img.style.setProperty('--d', s.d + 's');
+      img.style.setProperty('--d', d + 's');
       img.alt = '';
       collage.appendChild(img);
     });
