@@ -52,7 +52,8 @@
       'sizes="(max-width: 767px) 46vw, 28vw" loading="lazy" alt="' + p.client + ' — ' + p.name + '"></figure>';
     el.addEventListener('click', function (e) {
       e.preventDefault();
-      openProject(p, num, el);
+      // number as currently displayed (renumbered per active filter)
+      openProject(p, el.querySelector('.num').textContent, el);
     });
     grid.appendChild(el);
   });
@@ -96,6 +97,11 @@
           el.style.opacity = '0';
           entering.push(el);
         }
+      });
+
+      // Renumber the visible set 01..N so counts make sense per category
+      staying.forEach(function (el, i) {
+        el.querySelector('.num').textContent = ('0' + (i + 1)).slice(-2);
       });
 
       // Last + Invert + Play: glide survivors from old spot to new
