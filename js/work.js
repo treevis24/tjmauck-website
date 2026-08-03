@@ -140,8 +140,7 @@
      Project view: FLIP-expand the clicked thumbnail to center stage,
      then collage the grabs in around the film.
      ------------------------------------------------------------------ */
-  // Tile fade-in order: outward from the center of the 4x2 wall
-  var GRAB_DELAYS = [.18, .06, .06, .18, .24, .12, .12, .24];
+  var GRAB_COUNT = 8;
 
   function openProject(p, num, itemEl) {
     // Populate stage
@@ -160,15 +159,21 @@
       media.appendChild(still);
     }
 
-    // Grab wall: 8 tiles, fading in outward from the center
+    // Grab wall: 16:9 tiles cycling through the 8 grabs, enough rows to
+    // cover the viewport (last row crops at the bottom edge)
     collage.innerHTML = '';
-    GRAB_DELAYS.forEach(function (d, i) {
+    var cols = window.matchMedia('(max-width: 767px)').matches ? 2 : 4;
+    var rowH = (window.innerWidth / cols) * 9 / 16;
+    var rows = Math.ceil(window.innerHeight / rowH);
+    for (var i = 0; i < cols * rows; i++) {
       var img = document.createElement('img');
-      img.src = 'assets/img/work/' + p.slug + '/grab-' + (i + 1) + '.jpg';
-      img.style.setProperty('--d', d + 's');
+      // offset each repeat cycle so duplicates don't stack vertically
+      var g = (i + Math.floor(i / GRAB_COUNT) * 3) % GRAB_COUNT;
+      img.src = 'assets/img/work/' + p.slug + '/grab-' + (g + 1) + '.jpg';
+      img.style.setProperty('--d', (i % GRAB_COUNT) * .05 + 's');
       img.alt = '';
       collage.appendChild(img);
-    });
+    }
 
     view.hidden = false;
     document.body.style.overflow = 'hidden';
