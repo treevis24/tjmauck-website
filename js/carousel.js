@@ -82,6 +82,65 @@
     }, 1500);
   }
 
+  /* ------------------------------------------------------------------
+     Film overlay: clicking a slide plays the full piece over a wall of
+     stills, mirroring the Work page's project view.
+     ------------------------------------------------------------------ */
+  var filmView = document.querySelector('.film-view');
+  var fvMedia = filmView.querySelector('.fv-media');
+  var fvTitle = filmView.querySelector('.fv-title');
+  var fvCollage = filmView.querySelector('.fv-collage');
+  var fvClose = filmView.querySelector('.fv-close');
+  var GRABS = 12;
+
+  function openFilm(slide) {
+    var client = slide.querySelector('.st-client');
+    var name = slide.querySelector('.st-name');
+    fvTitle.textContent = (client ? client.textContent : '') + (name ? " '" + name.textContent + "'" : '');
+
+    fvMedia.innerHTML = '';
+    var iframe = document.createElement('iframe');
+    iframe.src = slide.dataset.watch;
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+    iframe.allowFullscreen = true;
+    fvMedia.appendChild(iframe);
+
+    fvCollage.innerHTML = '';
+    for (var i = 0; i < GRABS; i++) {
+      var img = document.createElement('img');
+      img.src = 'assets/img/work/' + slide.dataset.grabs + '/grab-' + (i + 1) + '.jpg';
+      img.style.setProperty('--d', i * .05 + 's');
+      img.alt = '';
+      fvCollage.appendChild(img);
+    }
+
+    filmView.hidden = false;
+    requestAnimationFrame(function () { filmView.classList.add('open'); });
+    slides.forEach(function (s) { s.querySelector('video').pause(); });
+  }
+
+  function closeFilm() {
+    filmView.classList.remove('open');
+    filmView.hidden = true;
+    fvMedia.innerHTML = '';
+    fvCollage.innerHTML = '';
+    if (document.body.classList.contains('ready')) {
+      var active = slides[+carousel.dataset.active || 0].querySelector('video');
+      active.play().catch(function () {});
+    }
+  }
+
+  slides.forEach(function (slide) {
+    slide.addEventListener('click', function () {
+      if (slide.dataset.watch && filmView.hidden) openFilm(slide);
+    });
+  });
+
+  fvClose.addEventListener('click', closeFilm);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !filmView.hidden) closeFilm();
+  });
+
   // Resume the active loop when the tab becomes visible again
   document.addEventListener('visibilitychange', function () {
     if (!document.hidden && document.body.classList.contains('ready')) {
