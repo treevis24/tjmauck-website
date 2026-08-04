@@ -17,7 +17,7 @@
     { slug: 'hims',           client: 'Hims',            name: 'Life Is Sexual',            cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/563594183?autoplay=1' },
     { slug: 'search-dog',     client: 'Natl. Search Dog Foundation', name: 'From Rescued to Rescuer', cats: ['corporate', 'documentary'], vimeo: 'https://player.vimeo.com/video/276766887?autoplay=1' },
     { slug: 'la-femme',       client: 'Velvet Canyon',   name: 'La Femme',                  cats: ['narrative'],                 vimeo: 'https://player.vimeo.com/video/341268178?autoplay=1' },
-    { slug: 'only-in-dreams', client: 'Only in Dreams',  name: 'Short Film',                cats: ['narrative'],                 vimeo: 'https://www.youtube-nocookie.com/embed/EvfffIIJ0d0?autoplay=1' },
+    { slug: 'only-in-dreams', client: 'Only in Dreams',  name: 'Short Film',                cats: ['narrative'],                 vimeo: null, external: 'https://www.youtube.com/watch?v=EvfffIIJ0d0' },
     { slug: 'coachella',      client: 'The Art of Coachella', name: 'Documentary',          cats: ['documentary'],               vimeo: null },
     { slug: 'esalon',         client: 'eSalon',          name: 'Victoria',                  cats: ['commercial', 'corporate'],   vimeo: null },
     { slug: 'dermalogica',    client: 'Dermalogica',     name: 'Hydro Masque Exfoliator',   cats: ['commercial'],                vimeo: null },
@@ -52,6 +52,11 @@
       'sizes="(max-width: 767px) 46vw, 28vw" loading="lazy" alt="' + p.client + ' — ' + p.name + '"></figure>';
     el.addEventListener('click', function (e) {
       e.preventDefault();
+      // External films (e.g. Omeleto's YouTube page) open in a new tab
+      if (p.external) {
+        window.open(p.external, '_blank', 'noopener');
+        return;
+      }
       // number as currently displayed (renumbered per active filter)
       openProject(p, el.querySelector('.num').textContent, el);
     });

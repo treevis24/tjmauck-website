@@ -132,7 +132,14 @@
 
   slides.forEach(function (slide) {
     slide.addEventListener('click', function () {
-      if (slide.dataset.watch && filmView.hidden) openFilm(slide);
+      if (!slide.dataset.watch || !filmView.hidden) return;
+      // External films (e.g. Omeleto's YouTube page) open in a new tab so
+      // viewers land where the views and comments live
+      if (slide.dataset.external) {
+        window.open(slide.dataset.watch, '_blank', 'noopener');
+        return;
+      }
+      openFilm(slide);
     });
   });
 
