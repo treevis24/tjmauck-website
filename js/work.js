@@ -140,7 +140,7 @@
      Project view: FLIP-expand the clicked thumbnail to center stage,
      then collage the grabs in around the film.
      ------------------------------------------------------------------ */
-  var GRAB_COUNT = 8;
+  var GRAB_COUNT = 12; // curated photographic frames per project, used once each
 
   function openProject(p, num, itemEl) {
     // Populate stage
@@ -159,18 +159,13 @@
       media.appendChild(still);
     }
 
-    // Grab wall: 16:9 tiles cycling through the 8 grabs, enough rows to
-    // cover the viewport (last row crops at the bottom edge)
+    // Grab wall: 12 curated frames, each used once — 3x4 on desktop
+    // (bottom row crops at the viewport edge), 2x6 on mobile
     collage.innerHTML = '';
-    var cols = window.matchMedia('(max-width: 767px)').matches ? 2 : 4;
-    var rowH = (window.innerWidth / cols) * 9 / 16;
-    var rows = Math.ceil(window.innerHeight / rowH);
-    for (var i = 0; i < cols * rows; i++) {
+    for (var i = 0; i < GRAB_COUNT; i++) {
       var img = document.createElement('img');
-      // offset each repeat cycle so duplicates don't stack vertically
-      var g = (i + Math.floor(i / GRAB_COUNT) * 3) % GRAB_COUNT;
-      img.src = 'assets/img/work/' + p.slug + '/grab-' + (g + 1) + '.jpg';
-      img.style.setProperty('--d', (i % GRAB_COUNT) * .05 + 's');
+      img.src = 'assets/img/work/' + p.slug + '/grab-' + (i + 1) + '.jpg';
+      img.style.setProperty('--d', i * .05 + 's');
       img.alt = '';
       collage.appendChild(img);
     }
