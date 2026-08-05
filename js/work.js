@@ -19,11 +19,26 @@
     { slug: 'la-femme',       client: 'Velvet Canyon',   name: 'La Femme',                  cats: ['narrative'],                 vimeo: 'https://player.vimeo.com/video/341268178?autoplay=1' },
     { slug: 'only-in-dreams', client: 'Only in Dreams',  name: 'Short Film',                cats: ['narrative'],                 vimeo: null, external: 'https://www.youtube.com/watch?v=EvfffIIJ0d0' },
     { slug: 'coachella',      client: 'The Art of Coachella', name: 'Documentary',          cats: ['documentary'],               vimeo: 'https://player.vimeo.com/video/215336883?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
-    { slug: 'esalon',         client: 'eSalon',          name: 'Victoria',                  cats: ['commercial', 'corporate'],   vimeo: null },
+    { slug: 'esalon',         client: 'eSalon',          name: 'Victoria',                  cats: ['commercial', 'corporate'],   vimeo: 'https://player.vimeo.com/video/1215877137?h=afd99dcc8a&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'dermalogica',    client: 'Dermalogica',     name: 'Hydro Masque Exfoliator',   cats: ['commercial'],                vimeo: null },
     { slug: 'belle-keeks',    client: 'Belle & Keeks',   name: 'Short Film',                cats: ['narrative'],                 vimeo: null },
     { slug: 'surprise',       client: 'Surprise!',       name: 'Short Film',                cats: ['narrative'],                 vimeo: null },
-    { slug: 'samantha-wills', client: 'Samantha Wills',  name: 'For Billabong',             cats: ['commercial'],                vimeo: null }
+    { slug: 'samantha-wills', client: 'Samantha Wills',  name: 'For Billabong',             cats: ['commercial'],                vimeo: null },
+    { slug: 'nixon-deserted',       client: 'Nixon',            name: 'Deserted',              cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/235424323?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'aldo-cozy-up',         client: 'Aldo Shoes',       name: 'Cozy Up',               cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/451267948?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'aldo-home-holidays',   client: 'Aldo Shoes',       name: 'Home for the Holidays', cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/451267758?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'aldo-dream',           client: 'Aldo Shoes',       name: 'Get Ready to Dream',    cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/332028678?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'sdf-who-we-are',       client: 'Natl. Search Dog Foundation', name: 'Who We Are', cats: ['corporate', 'documentary'], grabs: false, vimeo: 'https://player.vimeo.com/video/183623093?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'endpain',              client: 'Endpain',          name: 'Explore',               cats: ['documentary'], grabs: false, vimeo: 'https://player.vimeo.com/video/216581616?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'will-strip-for-change', client: 'Will Strip for Change', name: 'Documentary',    cats: ['documentary'], grabs: false, vimeo: 'https://player.vimeo.com/video/216566993?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'moonchild',            client: 'Moonchild',        name: 'Short Film',            cats: ['narrative'],   grabs: false, vimeo: 'https://player.vimeo.com/video/215365527?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'this-side-of-the-dirt', client: 'This Side of the Dirt', name: 'Short Film',     cats: ['narrative'],   grabs: false, vimeo: 'https://player.vimeo.com/video/215296101?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'agua-mala',            client: 'Aaron Orbit',      name: 'Agua Mala',             cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/174910348?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'this-legend',          client: 'This Legend',      name: 'Holiday from Crazy',    cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/112542117?h=14b7da2cc0&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'aof-ava',              client: 'Army of Freshmen', name: 'Ava',                   cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/51664698?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'jeff-hershey',         client: 'Jeff Hershey & the Heartbeats', name: "Don't Come Around", cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/39650692?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'aof-body-parts',       client: 'Army of Freshmen', name: 'Body Parts',            cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/34727331?h=9a3efc8b20&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'assemble-skyline',     client: 'Assemble the Skyline', name: "We're Not Going Down Without a War", cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/34727340?autoplay=1&title=0&byline=0&portrait=0&badge=0' }
   ];
 
   var grid = document.querySelector('.grid');
@@ -165,14 +180,17 @@
     }
 
     // Grab wall: 12 curated frames, each used once — 3x4 on desktop
-    // (bottom row crops at the viewport edge), 2x6 on mobile
+    // (bottom row crops at the viewport edge), 2x6 on mobile.
+    // Projects without extracted grabs (grabs: false) play on a plain backdrop.
     collage.innerHTML = '';
-    for (var i = 0; i < GRAB_COUNT; i++) {
-      var img = document.createElement('img');
-      img.src = 'assets/img/work/' + p.slug + '/grab-' + (i + 1) + '.jpg';
-      img.style.setProperty('--d', i * .05 + 's');
-      img.alt = '';
-      collage.appendChild(img);
+    if (p.grabs !== false) {
+      for (var i = 0; i < GRAB_COUNT; i++) {
+        var img = document.createElement('img');
+        img.src = 'assets/img/work/' + p.slug + '/grab-' + (i + 1) + '.jpg';
+        img.style.setProperty('--d', i * .05 + 's');
+        img.alt = '';
+        collage.appendChild(img);
+      }
     }
 
     view.hidden = false;
