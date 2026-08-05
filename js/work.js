@@ -19,12 +19,12 @@
     { slug: 'search-dog',     client: 'Natl. Search Dog Foundation', name: 'From Rescued to Rescuer', cats: ['commercial', 'documentary'], vimeo: 'https://player.vimeo.com/video/276766887?autoplay=1' },
     { slug: 'la-femme',       client: 'Velvet Canyon',   name: 'La Femme',                  cats: ['narrative'],                 vimeo: 'https://player.vimeo.com/video/341268178?autoplay=1' },
     { slug: 'coachella',      client: 'The Art of Coachella', name: 'Documentary',          cats: ['documentary'],               vimeo: 'https://player.vimeo.com/video/215336883?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
-    { slug: 'esalon',         client: 'eSalon',          name: 'Victoria',                  cats: ['commercial'],   vimeo: 'https://player.vimeo.com/video/1215877137?h=afd99dcc8a&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'esalon',         client: 'eSalon',          name: 'Hair Stories',                  cats: ['commercial'],   vimeo: 'https://player.vimeo.com/video/1215877137?h=afd99dcc8a&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'dermalogica',    client: 'Dermalogica',     name: 'Hydro Masque Exfoliator',   cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/451292737?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'belle-keeks',    client: 'Belle & Keeks',   name: 'Short Film',                cats: ['narrative'],                 vimeo: 'https://player.vimeo.com/video/890715534?h=79e6f2edd1&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'surprise',       client: 'Surprise!',       name: 'Short Film',                cats: ['narrative'],                 vimeo: 'https://player.vimeo.com/video/334593957?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'samantha-wills', client: 'Samantha Wills',  name: 'For Billabong',             cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/198171166?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
-    { slug: 'endpain',              client: 'Endpain',          name: 'Explore',               cats: ['commercial'], grabs: false, vimeo: 'https://player.vimeo.com/video/216581616?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'endpain',              client: 'Endpain',          name: 'Campaign',               cats: ['commercial'], grabs: false, vimeo: 'https://player.vimeo.com/video/216581616?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'nixon-deserted',       client: 'Nixon',            name: 'Deserted',              cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/235424323?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'aldo-cozy-up',         client: 'Aldo Shoes',       name: 'Cozy Up',               cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/451267948?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'aldo-home-holidays',   client: 'Aldo Shoes',       name: 'Home for the Holidays', cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/451267758?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
@@ -39,7 +39,7 @@
     { slug: 'jeff-hershey',         client: 'Jeff Hershey & the Heartbeats', name: "Don't Come Around", cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/39650692?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'aof-body-parts',       client: 'Army of Freshmen', name: 'Body Parts',            cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/34727331?h=9a3efc8b20&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'assemble-skyline',     client: 'Assemble the Skyline', name: "We're Not Going Down Without a War", cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/34727340?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
-    { slug: 'niagara',              client: 'Niagara',          name: 'Commercial',             cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/1215901732?h=ca5ad26c31&autoplay=1&title=0&byline=0&portrait=0&badge=0' }
+    { slug: 'niagara',              client: 'Niagara',          name: 'What Makes Us Move',             cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/1215901732?h=ca5ad26c31&autoplay=1&title=0&byline=0&portrait=0&badge=0' }
   ];
 
   var grid = document.querySelector('.grid');
