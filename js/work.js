@@ -39,7 +39,7 @@
     { slug: 'jeff-hershey',         client: 'Jeff Hershey & the Heartbeats', name: "Don't Come Around", cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/39650692?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'aof-body-parts',       client: 'Army of Freshmen', name: 'Body Parts',            cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/34727331?h=9a3efc8b20&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'assemble-skyline',     client: 'Assemble the Skyline', name: "We're Not Going Down Without a War", cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/34727340?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
-    { slug: 'niagara',              client: 'Niagara',          name: 'Commercial',            cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/1215901732?h=ca5ad26c31&autoplay=1&title=0&byline=0&portrait=0&badge=0' }
+    { slug: 'niagara',              client: 'Niagara',          name: 'Corporate',             cats: ['corporate'],  grabs: false, vimeo: 'https://player.vimeo.com/video/1215901732?h=ca5ad26c31&autoplay=1&title=0&byline=0&portrait=0&badge=0' }
   ];
 
   var grid = document.querySelector('.grid');
