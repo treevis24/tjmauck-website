@@ -13,7 +13,7 @@
   var PROJECTS = [
     { slug: 'whipsmart',      client: 'Whipsmart',       name: 'Your Story Starts Here',    cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/1205864168?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'ben-harper',     client: 'Ben Harper',      name: 'Before the Rain Dried',     cats: ['music-video'],               vimeo: 'https://player.vimeo.com/video/1070519366?h=5d125dd725&autoplay=1' },
-    { slug: 'aveeno',         client: 'Aveeno',          name: 'Healthy Is Our Nature',     cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/925095042?autoplay=1' },
+    { slug: 'aveeno',         client: 'Aveeno',          name: 'Healthy Is Our Nature',     cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/1215867282?h=42cb956fa2&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'hims',           client: 'Hims',            name: 'Life Is Sexual',            cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/563594183?autoplay=1' },
     { slug: 'search-dog',     client: 'Natl. Search Dog Foundation', name: 'From Rescued to Rescuer', cats: ['corporate', 'documentary'], vimeo: 'https://player.vimeo.com/video/276766887?autoplay=1' },
     { slug: 'la-femme',       client: 'Velvet Canyon',   name: 'La Femme',                  cats: ['narrative'],                 vimeo: 'https://player.vimeo.com/video/341268178?autoplay=1' },
