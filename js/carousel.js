@@ -115,12 +115,14 @@
     }
 
     filmView.hidden = false;
+    document.body.classList.add('film-open');
     requestAnimationFrame(function () { filmView.classList.add('open'); });
     slides.forEach(function (s) { s.querySelector('video').pause(); });
   }
 
   function closeFilm() {
     filmView.classList.remove('open');
+    document.body.classList.remove('film-open');
     filmView.hidden = true;
     fvMedia.innerHTML = '';
     fvCollage.innerHTML = '';

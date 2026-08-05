@@ -45,7 +45,7 @@ button {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 2000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -78,6 +78,13 @@ button {
   letter-spacing: .6px;
   margin-top: 2px;
 }
+
+body.film-open .nav-links {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-links { transition: opacity .3s ease; }
 
 .nav-links a {
   margin-left: 28px;

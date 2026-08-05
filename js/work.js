@@ -194,6 +194,7 @@
     }
 
     view.hidden = false;
+    document.body.classList.add('film-open');
     document.body.style.overflow = 'hidden';
 
     // FLIP: from the clicked thumbnail's rect to the centered stage
@@ -217,6 +218,7 @@
     view.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, easing: 'linear' })
       .onfinish = function () {
         view.hidden = true;
+        document.body.classList.remove('film-open');
         media.innerHTML = '';
         collage.innerHTML = '';
         document.body.style.overflow = '';
