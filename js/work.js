@@ -16,10 +16,10 @@
     { slug: 'only-in-dreams', client: 'Only in Dreams',  name: 'Short Film',                cats: ['narrative'],                 vimeo: null, external: 'https://www.youtube.com/watch?v=EvfffIIJ0d0' },
     { slug: 'hims',           client: 'Hims',            name: 'Life Is Sexual',            cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/563594183?autoplay=1' },
     { slug: 'whipsmart',      client: 'Whipsmart',       name: 'Your Story Starts Here',    cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/1205864168?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
-    { slug: 'search-dog',     client: 'Natl. Search Dog Foundation', name: 'From Rescued to Rescuer', cats: ['corporate', 'documentary'], vimeo: 'https://player.vimeo.com/video/276766887?autoplay=1' },
+    { slug: 'search-dog',     client: 'Natl. Search Dog Foundation', name: 'From Rescued to Rescuer', cats: ['commercial', 'documentary'], vimeo: 'https://player.vimeo.com/video/276766887?autoplay=1' },
     { slug: 'la-femme',       client: 'Velvet Canyon',   name: 'La Femme',                  cats: ['narrative'],                 vimeo: 'https://player.vimeo.com/video/341268178?autoplay=1' },
     { slug: 'coachella',      client: 'The Art of Coachella', name: 'Documentary',          cats: ['documentary'],               vimeo: 'https://player.vimeo.com/video/215336883?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
-    { slug: 'esalon',         client: 'eSalon',          name: 'Victoria',                  cats: ['commercial', 'corporate'],   vimeo: 'https://player.vimeo.com/video/1215877137?h=afd99dcc8a&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'esalon',         client: 'eSalon',          name: 'Victoria',                  cats: ['commercial'],   vimeo: 'https://player.vimeo.com/video/1215877137?h=afd99dcc8a&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'dermalogica',    client: 'Dermalogica',     name: 'Hydro Masque Exfoliator',   cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/451292737?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'belle-keeks',    client: 'Belle & Keeks',   name: 'Short Film',                cats: ['narrative'],                 vimeo: null },
     { slug: 'surprise',       client: 'Surprise!',       name: 'Short Film',                cats: ['narrative'],                 vimeo: null },
@@ -28,7 +28,7 @@
     { slug: 'aldo-cozy-up',         client: 'Aldo Shoes',       name: 'Cozy Up',               cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/451267948?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'aldo-home-holidays',   client: 'Aldo Shoes',       name: 'Home for the Holidays', cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/451267758?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'aldo-dream',           client: 'Aldo Shoes',       name: 'Get Ready to Dream',    cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/332028678?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
-    { slug: 'sdf-who-we-are',       client: 'Natl. Search Dog Foundation', name: 'Who We Are', cats: ['corporate', 'documentary'], grabs: false, vimeo: 'https://player.vimeo.com/video/183623093?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
+    { slug: 'sdf-who-we-are',       client: 'Natl. Search Dog Foundation', name: 'Who We Are', cats: ['commercial', 'documentary'], grabs: false, vimeo: 'https://player.vimeo.com/video/183623093?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'endpain',              client: 'Endpain',          name: 'Explore',               cats: ['documentary'], grabs: false, vimeo: 'https://player.vimeo.com/video/216581616?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'will-strip-for-change', client: 'Will Strip for Change', name: 'Documentary',    cats: ['documentary'], grabs: false, vimeo: 'https://player.vimeo.com/video/216566993?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'moonchild',            client: 'Moonchild',        name: 'Documentary',           cats: ['documentary'],   grabs: false, vimeo: 'https://player.vimeo.com/video/215365527?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
@@ -39,7 +39,7 @@
     { slug: 'jeff-hershey',         client: 'Jeff Hershey & the Heartbeats', name: "Don't Come Around", cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/39650692?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'aof-body-parts',       client: 'Army of Freshmen', name: 'Body Parts',            cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/34727331?h=9a3efc8b20&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'assemble-skyline',     client: 'Assemble the Skyline', name: "We're Not Going Down Without a War", cats: ['music-video'], grabs: false, vimeo: 'https://player.vimeo.com/video/34727340?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
-    { slug: 'niagara',              client: 'Niagara',          name: 'Corporate',             cats: ['corporate'],  grabs: false, vimeo: 'https://player.vimeo.com/video/1215901732?h=ca5ad26c31&autoplay=1&title=0&byline=0&portrait=0&badge=0' }
+    { slug: 'niagara',              client: 'Niagara',          name: 'Commercial',             cats: ['commercial'],  grabs: false, vimeo: 'https://player.vimeo.com/video/1215901732?h=ca5ad26c31&autoplay=1&title=0&byline=0&portrait=0&badge=0' }
   ];
 
   var grid = document.querySelector('.grid');
