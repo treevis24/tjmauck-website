@@ -20,7 +20,7 @@
     { slug: 'la-femme',       client: 'Velvet Canyon',   name: 'La Femme',                  cats: ['narrative'],                 vimeo: 'https://player.vimeo.com/video/341268178?autoplay=1' },
     { slug: 'coachella',      client: 'The Art of Coachella', name: 'Documentary',          cats: ['documentary'],               vimeo: 'https://player.vimeo.com/video/215336883?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'esalon',         client: 'eSalon',          name: 'Victoria',                  cats: ['commercial', 'corporate'],   vimeo: 'https://player.vimeo.com/video/1215877137?h=afd99dcc8a&autoplay=1&title=0&byline=0&portrait=0&badge=0' },
-    { slug: 'dermalogica',    client: 'Dermalogica',     name: 'Hydro Masque Exfoliator',   cats: ['commercial'],                vimeo: null },
+    { slug: 'dermalogica',    client: 'Dermalogica',     name: 'Hydro Masque Exfoliator',   cats: ['commercial'],                vimeo: 'https://player.vimeo.com/video/451292737?autoplay=1&title=0&byline=0&portrait=0&badge=0' },
     { slug: 'belle-keeks',    client: 'Belle & Keeks',   name: 'Short Film',                cats: ['narrative'],                 vimeo: null },
     { slug: 'surprise',       client: 'Surprise!',       name: 'Short Film',                cats: ['narrative'],                 vimeo: null },
     { slug: 'samantha-wills', client: 'Samantha Wills',  name: 'For Billabong',             cats: ['commercial'],                vimeo: null },
