@@ -135,10 +135,10 @@ body.film-open .nav-links {
   transform: translateY(0);
 }
 
-/* Full-width feature image: breaks the columns for one cinematic frame */
+/* Full-width feature image: opens the collage with one cinematic frame */
 .ph-wide {
   column-span: all;
-  margin: calc(var(--gutter) * 2) 0;
+  margin: 0 0 calc(var(--gutter) * 2);
 }
 
 .ph img {
