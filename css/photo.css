@@ -1,0 +1,232 @@
+/* ==========================================================================
+   TJ Mauck Films — Photography
+   Curated masonry collage: native aspect ratios, slim gutters, dark room.
+   ========================================================================== */
+
+:root {
+  --bg: #0e0e0e;
+  --text: #f2f2f2;
+  --grey: rgba(242, 242, 242, .4);
+  --nav-pad: 44px;
+  --gutter: 14px;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+html { background: var(--bg); }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  min-height: 100svh;
+}
+
+img { display: block; max-width: 100%; }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Nav (same skeleton as the rest of the site)
+   -------------------------------------------------------------------------- */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--nav-pad) - 6px) var(--nav-pad);
+  background: linear-gradient(to bottom, rgba(14, 14, 14, .92), rgba(14, 14, 14, 0));
+}
+
+.nav a {
+  pointer-events: auto;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: .2px;
+}
+
+.nav a:hover { opacity: .7; }
+
+.nav-title {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  line-height: 1.15;
+}
+
+.nav-sub {
+  display: block;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: .6px;
+  margin-top: 2px;
+}
+
+.nav-links a {
+  margin-left: 28px;
+  font-weight: 300;
+}
+
+.nav-links a.active { font-weight: 700; }
+
+body.film-open .nav-links {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-links { transition: opacity .3s ease; }
+
+/* --------------------------------------------------------------------------
+   Page header + masonry collage
+   -------------------------------------------------------------------------- */
+
+.photo {
+  padding: 140px var(--nav-pad) 60px;
+}
+
+.photo-label {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.photo-label .count {
+  color: var(--grey);
+  margin-left: 14px;
+}
+
+.collage {
+  column-count: 3;
+  column-gap: var(--gutter);
+}
+
+.ph {
+  display: block;
+  width: 100%;
+  break-inside: avoid;
+  margin-bottom: var(--gutter);
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background: #161616;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);
+}
+
+.ph.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ph img {
+  width: 100%;
+  height: auto;
+  transition: opacity .4s ease;
+}
+
+.ph:hover img { opacity: .85; }
+
+/* --------------------------------------------------------------------------
+   Lightbox
+   -------------------------------------------------------------------------- */
+
+.pl {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  background: rgba(14, 14, 14, .97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pl[hidden] { display: none; }
+
+.pl img {
+  max-width: 92vw;
+  max-height: 88svh;
+  width: auto;
+  height: auto;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, .6);
+}
+
+.pl button {
+  position: absolute;
+  color: #fff;
+  opacity: .8;
+  z-index: 1520;
+}
+
+.pl button:hover { opacity: 1; }
+
+.pl-close {
+  top: 18px;
+  right: 26px;
+  font-size: 40px;
+  line-height: 1;
+}
+
+.pl-prev,
+.pl-next {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 56px;
+  line-height: 1;
+  padding: 20px 14px;
+}
+
+.pl-prev { left: 8px; }
+.pl-next { right: 8px; }
+
+.pl-counter {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--grey);
+}
+
+/* --------------------------------------------------------------------------
+   Mobile
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .nav { padding: 18px 24px; }
+  .nav-title { font-size: 18px; }
+  .nav-sub { font-size: 11px; }
+
+  .photo {
+    padding: 110px 14px 40px;
+    --gutter: 8px;
+  }
+
+  .photo-label { margin-bottom: 16px; }
+
+  .collage { column-count: 2; }
+
+  .pl-prev, .pl-next { font-size: 40px; padding: 20px 6px; }
+}
