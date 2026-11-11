@@ -111,11 +111,6 @@ body.film-open .nav-links {
   margin-bottom: 24px;
 }
 
-.photo-label .count {
-  color: var(--grey);
-  margin-left: 14px;
-}
-
 .collage {
   column-count: 3;
   column-gap: var(--gutter);
