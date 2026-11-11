@@ -140,6 +140,12 @@ body.film-open .nav-links {
   transform: translateY(0);
 }
 
+/* Full-width feature image: breaks the columns for one cinematic frame */
+.ph-wide {
+  column-span: all;
+  margin: calc(var(--gutter) * 2) 0;
+}
+
 .ph img {
   width: 100%;
   height: auto;
